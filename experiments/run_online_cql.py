@@ -33,7 +33,7 @@ flags.DEFINE_integer('batch_size', 256, 'Batch size for the learner.')
 flags.DEFINE_integer('ep_max_len', 500, 'Maximum length of an episode.')
 FLAGS = flags.FLAGS
 
-WANDB_PROJECT_PATH = 'richa/Projects/offline-rl/'
+WANDB_PROJECT_PATH = 'iitm-cs6910/offline-rl/{}:latest'
 
 
 def init_or_resume():
