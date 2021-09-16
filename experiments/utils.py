@@ -306,7 +306,7 @@ def load_wb_model(model_name: str, model_tag: str, dir: str = 'network', wandb_p
   wb_run = wandb.init()
   wb_path = wandb_project_path.format(model_name, model_tag)
   logging.info("Downloading model artifact from: " + wb_path)
-  artifact = wb_run.use_artifact('iitm-cs6910/offline-rl/dqn-online-Empty-Random-6x6:latest', type='model')
+  artifact = wb_run.use_artifact(wb_path, type='model')
   download_dir = artifact.download()
   logging.info("Model checkpoint downloaded to: {}".format(download_dir))
   model = os.path.join(download_dir, f'snapshots/{dir}')
