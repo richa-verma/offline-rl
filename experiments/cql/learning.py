@@ -126,7 +126,8 @@ class CQLLearner(acme.Learner, tf2_savers.TFSaveable):
 
     # Pull out the data needed for updates/priorities.
     inputs = next(self._iterator)
-    o_tm1, a_tm1, r_t, d_t, o_t = inputs.data
+    #print("err", inputs.data)
+    o_tm1, a_tm1, r_t, d_t, o_t, ext = inputs.data
     keys, probs = inputs.info[:2]
 
     with tf.GradientTape() as tape:
