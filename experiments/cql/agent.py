@@ -17,9 +17,10 @@
 
 import copy
 
-from acme import datasets
+#from acme import datasets
 from acme import specs
 from acme.adders import reverb as adders
+from acme.datasets import reverb as datasets
 from acme.agents import agent
 from acme.agents.tf import actors
 from acme.tf import utils as tf2_utils
@@ -109,9 +110,11 @@ class CQL(agent.Agent):
 
     # The dataset provides an interface to sample from replay.
     replay_client = reverb.TFClient(address)
-    dataset = datasets.make_reverb_dataset(
-        client=replay_client,
-        environment_spec=environment_spec,
+    dataset = datasets.make_dataset(
+        #client=replay_client,
+        server_address = address,
+        #environment_spec=environment_spec,
+        environment_spec=None,
         batch_size=batch_size,
         prefetch_size=prefetch_size,
         transition_adder=True)
