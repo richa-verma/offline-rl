@@ -25,7 +25,7 @@ from acme.utils.loggers import base
 from custom_env_wrappers import CustomSinglePrecisionWrapper, ImgFlatObsWrapper
 from gym_minigrid.wrappers import FullyObsWrapper
 
-WANDB_PROJECT_PATH = 'kmeco/offline-rl/{}:{}'
+WANDB_PROJECT_PATH = 'iitm-cs6910/offline-rl/{}:{}'
 
 
 def _build_custom_loggers(wb_client):
@@ -79,6 +79,8 @@ class WBLogger(base.Logger):
   def write(self, values: base.LoggingData):
     self._wandb.log({self.label + k: v for k, v in values.items()})
     self._iter += 1
+  def close(self):
+    return
 
 
 def n_step_transition_from_episode(observations: types.NestedTensor,
@@ -304,7 +306,7 @@ def load_wb_model(model_name: str, model_tag: str, dir: str = 'network', wandb_p
   wb_run = wandb.init()
   wb_path = wandb_project_path.format(model_name, model_tag)
   logging.info("Downloading model artifact from: " + wb_path)
-  artifact = wb_run.use_artifact(wb_path, type='model')
+  artifact = wb_run.use_artifact('iitm-cs6910/offline-rl/dqn-online-Empty-Random-6x6:latest', type='model')
   download_dir = artifact.download()
   logging.info("Model checkpoint downloaded to: {}".format(download_dir))
   model = os.path.join(download_dir, f'snapshots/{dir}')
